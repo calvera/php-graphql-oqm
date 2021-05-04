@@ -66,7 +66,7 @@ class QueryObjectClassBuilder extends ObjectClassBuilder
      */
     protected function addSimpleSelector(string $propertyName, string $upperCamelName, bool $isDeprecated, ?string $deprecationReason)
     {
-        $method = "public function select$upperCamelName()
+        $method = "public function select$upperCamelName(): self
 {
     \$this->selectField(\"$propertyName\");
 
@@ -84,7 +84,7 @@ class QueryObjectClassBuilder extends ObjectClassBuilder
     protected function addObjectSelector(string $fieldName, string $upperCamelName, string $fieldTypeName, string $argsObjectName, bool $isDeprecated, ?string $deprecationReason)
     {
         $objectClassName  = $fieldTypeName . 'QueryObject';
-        $method = "public function select$upperCamelName($argsObjectName \$argsObject = null)
+        $method = "public function select$upperCamelName($argsObjectName \$argsObject = null): $objectClassName
 {
     \$object = new $objectClassName(\"$fieldName\");
     if (\$argsObject !== null) {
